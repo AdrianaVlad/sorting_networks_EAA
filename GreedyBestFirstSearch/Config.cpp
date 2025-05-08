@@ -1,39 +1,23 @@
-#include "Config.h"
-#include <fstream>
-#include <sstream>
-#include <iostream>
+﻿#include "Config.h"
 #include <thread>
 
 std::unordered_map<std::string, std::string> Config::props;
 bool Config::initialized = false;
 
-void Config::init(const std::string& filename) {
+void Config::init() {
     if (!initialized) {
-        load(filename);
+        props["subsumption"] = "SubsumptionMatchImpl";
+        props["tracing"] = "true";
+        props["maxWires"] = "18";
+        props["threads"] = "4";
+        props["monitorTime"] = "1000";
+
         initialized = true;
     }
 }
 
-void Config::load(const std::string& filename) {
-    std::ifstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "Could not load config file: " << filename << std::endl;
-        return;
-    }
-
-    std::string line;
-    while (std::getline(file, line)) {
-        auto pos = line.find('=');
-        if (pos != std::string::npos && line[0] != '#') {
-            std::string key = line.substr(0, pos);
-            std::string value = line.substr(pos + 1);
-            props[key] = value;
-        }
-    }
-}
-
 std::string Config::getSubsumptionImpl() {
-    return props.count("subsumption") ? props["subsumption"] : "SubsumptionDefaultImpl";
+    return props.count("subsumption") ? props["subsumption"] : "SubsumptionMatchImpl";
 }
 
 bool Config::isTracingEnabled() {
@@ -41,7 +25,7 @@ bool Config::isTracingEnabled() {
 }
 
 int Config::getMaxNbWires() {
-    return props.count("maxWires") ? std::stoi(props["maxWires"]) : 10;
+    return props.count("maxWires") ? std::stoi(props["maxWires"]) : 18;
 }
 
 int Config::getNbThreads() {

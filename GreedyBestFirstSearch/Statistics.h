@@ -9,7 +9,7 @@ class Network;
 class Statistics {
 public:
     static inline const bool ENABLED = true;
-    static inline const bool EXTENDED = false;
+    static inline const bool EXTENDED = true;
     static inline bool LOG = true;
 
     static inline int nbWires = 0;
@@ -44,6 +44,8 @@ public:
     static std::string getExtendedInfo();
     static void logSubsumed(Network* net, Network* subsumedBy, const std::vector<int>& perm);
     static void logFail(Network* net0, Network* net1);
+    static long long currentTimeMillis();
+    static long long currentMemoryUsage();
 
 private:
     static std::string formatTime(long long millis);

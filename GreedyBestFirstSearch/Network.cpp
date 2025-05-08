@@ -257,8 +257,10 @@ std::string Network::toParseableString() const {
     return oss.str();
 }
 
+#include "FitnessBadPosCount.h"
 
-FitnessEstimator* Network::fitnessEstimator = nullptr;
+FitnessBadPosCount fitnessImpl;
+FitnessEstimator* Network::fitnessEstimator = &fitnessImpl;
 
 
 void Network::parse(const std::string& str) {
@@ -292,3 +294,28 @@ bool Network::isSorting() const {
 Network::~Network() {
     //std::cout << "[DEBUG] Network destructor called at " << this << std::endl;
 }
+
+Comparator* Network::lastComparator(int wire0, int wire1) const {
+    if (wire0 >= last_.size() || wire1 >= last_.size()) return nullptr;
+    if (last_[wire0] == nullptr || last_[wire1] == nullptr) return nullptr;
+    return (last_[wire0] == last_[wire1]) ? last_[wire0] : nullptr;
+}
+
+
+void Network::parseOutput(const std::string& str) {
+    if (!outputSet_) {
+        outputSet_ = new OutputSet(this);
+    }
+
+    std::regex re("\\d+");
+    std::sregex_iterator it(str.begin(), str.end(), re);
+    std::sregex_iterator end;
+
+    while (it != end) {
+        int value = std::stoi(it->str());
+        Sequence* seq = Sequence::getInstance(nbWires_, value);
+        outputSet_->add(*seq);
+        ++it;
+    }
+}
+

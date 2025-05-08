@@ -9,7 +9,6 @@ class SubsumptionMatchImpl : public Subsumption {
 public:
     SubsumptionMatchImpl();
 
-    // Funcție pentru a găsi o permutare între cele două seturi de ieșiri
     std::vector<int> findPermutation(const OutputSet& out0, const OutputSet& out1) override;
 
 private:

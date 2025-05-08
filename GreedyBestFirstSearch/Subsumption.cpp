@@ -1,4 +1,4 @@
-#include "Subsumption.h"
+﻿#include "Subsumption.h"
 #include "Permutations.h"
 #include "Sequence.h"
 #include "Statistics.h"
@@ -11,7 +11,7 @@ std::vector<int> Subsumption::check(Network* net0, Network* net1) {
     OutputSet* out0 = net0->outputSet();
     OutputSet* out1 = net1->outputSet();
 
-    if (cannotSubsume(*out0, *out1)) {
+    if (out0->cannotSubsume(*out1)) {
         if (Statistics::ENABLED) {
             Statistics::subClusterSizeFail++;
         }
@@ -37,38 +37,6 @@ bool Subsumption::cannotSubsume(const OutputCluster& c0, const OutputCluster& c1
     return c0.size() > c1.size() ||
         c0.zeroCount() > c1.zeroCount() ||
         c0.oneCount() > c1.oneCount();
-}
-
-bool Subsumption::cannotSubsume(const OutputSet& out0, const OutputSet& out1) const {
-    if (out0.size() > out1.size()) return true;
-
-    if (out0.size() < out1.size()) {
-        if (out0.maxClusterSize() > out1.maxClusterSize() ||
-            out0.minClusterSize() > out1.minClusterSize() ||
-            out0.maxZeroCount() > out1.maxZeroCount() ||
-            out0.minZeroCount() > out1.minZeroCount() ||
-            out0.maxOneCount() > out1.maxOneCount() ||
-            out0.minOneCount() > out1.minOneCount()) {
-            return true;
-        }
-    }
-    else if (
-        out0.maxClusterSize() != out1.maxClusterSize() ||
-        out0.minClusterSize() != out1.minClusterSize() ||
-        out0.maxZeroCount() != out1.maxZeroCount() ||
-        out0.minZeroCount() != out1.minZeroCount() ||
-        out0.maxOneCount() != out1.maxOneCount() ||
-        out0.minOneCount() != out1.minOneCount()) {
-        return true;
-    }
-
-    for (int k = 1; k < out0.getNbWires(); ++k) {
-        if (cannotSubsume(*out0.cluster(k), *out1.cluster(k))) {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 bool Subsumption::checkPermutation(const OutputCluster& c0, const OutputCluster& c1, const std::vector<int>& perm) const {

@@ -101,17 +101,6 @@ bool OutputCluster::cannotSubsume(const OutputCluster& other) const {
     return size_ > other.size_ || count0_ > other.count0_ || count1_ > other.count1_;
 }
 
-bool OutputCluster::checkMatching(const OutputCluster& other, const std::vector<int>& perm) const {
-    for (int value0 = bitValues_->nextSetBit(0); value0 >= 0; value0 = bitValues_->nextSetBit(value0 + 1)) {
-        Sequence* seq = Sequence::getInstance(nbWires_, value0)->permute(perm);
-        int value1 = seq->getValue();
-        if (!other.bitValues_->get(value1)) {
-            return false;
-        }
-    }
-    return true;
-}
-
 bool OutputCluster::operator==(const OutputCluster& other) const {
     return level_ == other.level_ && *bitValues_ == *(other.bitValues_);
 }

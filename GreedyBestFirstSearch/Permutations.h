@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
+#include <mutex>
 
 class Permutations {
 public:
@@ -15,6 +16,7 @@ private:
     static std::vector<std::vector<std::vector<int>>> PERM;
     static std::vector<bool> used;
     static int count;
+    static std::once_flag initFlag;
 
     static const int FACT[13];
 
@@ -22,6 +24,4 @@ private:
     static void createIdentity(int n);
     static void createRec(int n, int len);
     static void create(int n);
-
-    static bool initialized;
 };

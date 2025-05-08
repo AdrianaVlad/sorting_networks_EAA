@@ -1,4 +1,4 @@
-#include "GreenFilter.h"
+﻿#include "GreenFilter.h"
 
 GreenFilter::GreenFilter(int nbWires) : Network(nbWires) {
     init();

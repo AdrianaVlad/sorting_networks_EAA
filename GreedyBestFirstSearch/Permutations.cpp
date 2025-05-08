@@ -11,18 +11,15 @@ const int Permutations::FACT[13] = {
 std::vector<std::vector<std::vector<int>>> Permutations::PERM;
 std::vector<bool> Permutations::used;
 int Permutations::count = 0;
-bool Permutations::initialized = false;
+std::once_flag Permutations::initFlag;
+
+static std::mutex debugMutex;
 
 void Permutations::init() {
-    if (initialized) return;
-    initialized = true;
-
     int n = Config::getMaxNbWires();
-
     PERM.resize(n + 1);
     for (int i = 1; i <= n; ++i) {
         createIdentity(i);
-        // create(i);
     }
 }
 
@@ -59,17 +56,24 @@ void Permutations::createRec(int n, int len) {
 }
 
 const std::vector<std::vector<std::vector<int>>>& Permutations::getAll() {
-    if (!initialized) init();
+    std::call_once(initFlag, init);
     return PERM;
 }
 
 const std::vector<std::vector<int>>& Permutations::get(int n) {
-    if (!initialized) init();
+    std::call_once(initFlag, init);
     return PERM[n];
 }
 
 const std::vector<int>& Permutations::identity(int n) {
-    if (!initialized) init();
+    std::call_once(initFlag, init);
+    /*
+    {
+        std::lock_guard<std::mutex> lock(debugMutex);
+        std::cout << "[DEBUG] Permutations::identity called with n = " << n << std::endl;
+    }
+    */
+
     return PERM[n][0];
 }
 

@@ -33,7 +33,6 @@ public:
 
     bool includes(const OutputCluster& other) const;
     bool cannotSubsume(const OutputCluster& other) const;
-    bool checkMatching(const OutputCluster& other, const std::vector<int>& perm) const;
 
     bool operator==(const OutputCluster& other) const;
 

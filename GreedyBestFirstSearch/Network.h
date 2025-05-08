@@ -72,6 +72,7 @@ public:
 
     std::vector<Comparator>& getComparators();
     bool isSorting() const;
+    Comparator* lastComparator(int wire0, int wire1) const;
 
 protected:
     int nbWires_;

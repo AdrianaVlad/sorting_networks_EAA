@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <sstream>
 #include <chrono>
+#include <windows.h> 
 
 void Statistics::reset() {
     finalChecksTime = 0;
@@ -77,6 +78,7 @@ std::string Statistics::getExtendedInfo() {
     oss << "Total networks identified: " << nbNetworks << "\n";
     oss << "Running time: " << formatTime(runningTime) << "\n";
     oss << "Final checks time: " << formatTime(finalChecksTime) << "\n";
+    oss << "Total time: " << formatTime(runningTime + finalChecksTime) << "\n";
     oss << "Used memory: " << usedMemory / (1024 * 1024) << " MB\n";
 
     if (ENABLED) {
@@ -126,4 +128,17 @@ void Statistics::logSubsumed(Network* net, Network* subsumedBy, const std::vecto
 
 void Statistics::logFail(Network* net0, Network* net1) {
     failMap[net0] = net1;
+}
+
+
+long long Statistics::currentTimeMillis() {
+    using namespace std::chrono;
+    return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+}
+
+long long Statistics::currentMemoryUsage() {
+    MEMORYSTATUSEX memInfo;
+    memInfo.dwLength = sizeof(memInfo);
+    GlobalMemoryStatusEx(&memInfo);
+    return memInfo.ullTotalPhys - memInfo.ullAvailPhys;
 }

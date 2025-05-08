@@ -16,7 +16,6 @@ public:
 
 protected:
     bool cannotSubsume(const OutputCluster& c0, const OutputCluster& c1) const;
-    bool cannotSubsume(const OutputSet& out0, const OutputSet& out1) const;
 
     bool checkPermutation(const OutputCluster& c0, const OutputCluster& c1, const std::vector<int>& perm) const;
     bool checkPermutation(const OutputSet& out0, const OutputSet& out1, const std::vector<int>& perm) const;

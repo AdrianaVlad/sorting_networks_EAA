@@ -1,7 +1,6 @@
 #include "SubsumptionMatchImpl.h"
 #include "SubsumptionVerifier.h"
 #include "OutputCluster.h"
-#include <algorithm>
 
 SubsumptionMatchImpl::SubsumptionMatchImpl() {}
 
@@ -11,10 +10,7 @@ std::vector<int> SubsumptionMatchImpl::findPermutation(const OutputSet& out0, co
     std::vector<std::vector<int>> degrees(2, std::vector<int>(nbWires, 0));
 
     for (int u = 0; u < nbWires; ++u) {
-        bool valid = false;
         for (int v = 0; v < nbWires; ++v) {
-            bool ok = true;
-
             for (int k = 1; k < nbWires; ++k) {
                 const OutputCluster* c0 = out0.cluster(k);
                 const OutputCluster* c1 = out1.cluster(k);
@@ -24,24 +20,15 @@ std::vector<int> SubsumptionMatchImpl::findPermutation(const OutputSet& out0, co
                     (c0->size() == c1->size() &&
                         ((c1->getPos0()[v] && !c0->getPos0()[u]) ||
                             (c1->getPos1()[v] && !c0->getPos1()[u])))) {
-                    ok = false;
-                    break;
+                    goto skip;
                 }
             }
-
-            if (ok) {
-                graph[u][v] = 1;
-                degrees[0][u]++;
-                degrees[1][v]++;
-                valid = true;
-            }
+            graph[u][v] = 1;
+            degrees[0][u]++;
+            degrees[1][v]++;
+        skip:;
         }
-
-        if (!valid) return {};
-
-        if (degrees[0][u] == 0) {
-            return {};
-        }
+        if (degrees[0][u] == 0) return {};
     }
 
     for (int w = 0; w < nbWires; ++w) {
@@ -54,6 +41,7 @@ std::vector<int> SubsumptionMatchImpl::findPermutation(const OutputSet& out0, co
 std::vector<int> SubsumptionMatchImpl::checkMatchings(const OutputSet& out0, const OutputSet& out1,
     std::vector<std::vector<int>>& graph,
     std::vector<std::vector<int>>& degrees) {
+
     auto matching = findMatching(graph);
     if (matching.empty()) return {};
 
@@ -105,18 +93,18 @@ std::vector<int> SubsumptionMatchImpl::checkMatchingsRec(const OutputSet& out0, 
     std::vector<std::vector<int>>& graph,
     std::vector<std::vector<int>>& degrees,
     std::vector<std::vector<int>>& matching) {
+
     int n = graph.size();
     auto cycle = findCycle(graph, degrees, matching);
     if (cycle.empty()) return {};
 
-    // Find a perfect matching M' by exchanging edges along the cycle. Output M'.
     std::vector<std::vector<int>> mprime = matching;
     int i = 1;
     while (i > 0) {
         int v = cycle[i];
         int w = (i + 1 < cycle.size()) ? cycle[i + 1] : cycle[0];
-        i = (i + 1 < cycle.size()) ? i + 2 : 0;
-
+        if (i + 1 < cycle.size()) i += 2;
+        else i = 0;
         mprime[1][v] = w;
         mprime[0][w] = v;
     }
@@ -192,11 +180,12 @@ std::vector<int> SubsumptionMatchImpl::checkMatchingsRec(const OutputSet& out0, 
 std::vector<int> SubsumptionMatchImpl::findCycle(const std::vector<std::vector<int>>& graph,
     const std::vector<std::vector<int>>& degrees,
     const std::vector<std::vector<int>>& matching) {
+
     int n = graph.size();
     for (int u = 0; u < n; ++u) {
         if (degrees[0][u] < 2) continue;
 
-        std::vector<std::vector<int>> visited(2, std::vector<int>(n, -1));
+        std::vector<std::vector<int>> visited(2, std::vector<int>(n, 0));
         visited[0][u] = 1;
         auto cycle = findCycleRec(graph, degrees, matching, u, 1, visited);
         if (!cycle.empty()) return cycle;
@@ -209,6 +198,7 @@ std::vector<int> SubsumptionMatchImpl::findCycleRec(const std::vector<std::vecto
     const std::vector<std::vector<int>>& matching,
     int u, int pos,
     std::vector<std::vector<int>>& visited) {
+
     int n = graph.size();
     int set = (pos - 1) % 2;
 
@@ -227,7 +217,7 @@ std::vector<int> SubsumptionMatchImpl::findCycleRec(const std::vector<std::vecto
     }
 
     for (int v = 0; v < n; ++v) {
-        if (visited[1 - set][v] >= 0 || degrees[1 - set][v] < 2) continue;
+        if (visited[1 - set][v] > 0 || degrees[1 - set][v] < 2) continue;
 
         bool edgeValid = (set == 0 && graph[u][v] == 1 && matching[set][u] == v) ||
             (set == 1 && graph[v][u] == 1 && matching[set][u] != v);
@@ -238,7 +228,7 @@ std::vector<int> SubsumptionMatchImpl::findCycleRec(const std::vector<std::vecto
         auto cycle = findCycleRec(graph, degrees, matching, v, pos + 1, visited);
         if (!cycle.empty()) return cycle;
 
-        visited[1 - set][v] = -1;
+        visited[1 - set][v] = 0;
     }
 
     return {};
