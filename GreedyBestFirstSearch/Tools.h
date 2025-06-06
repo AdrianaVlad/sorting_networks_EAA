@@ -6,9 +6,9 @@
 #include "Network.h"
 
 namespace Tools {
-    std::bitset<32> toBitSet(int value);
-    int toInt(const std::bitset<32>& bits);
-    std::string toBinaryString(int value, int nbits);
+    std::vector<bool> toBitSet(int value, int bitsCount=32);
+    int toInt(const std::vector<bool>& bitSet);
+    std::string toBinaryString(const std::bitset<32>& bits, int nbits);
 
     void printGraph(const std::vector<std::vector<int>>& graph);
     void printCycle(const std::vector<int>& cycle);

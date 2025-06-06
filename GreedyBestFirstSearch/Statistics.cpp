@@ -27,7 +27,11 @@ void Statistics::reset() {
 }
 
 void Statistics::print() {
-    std::cout << (EXTENDED ? getExtendedInfo() : getInfo()) << std::endl;
+    print(std::cout);
+}
+
+void Statistics::print(std::ostream& out) {
+    out << (EXTENDED ? getExtendedInfo() : getInfo()) << '\n';
 }
 
 void Statistics::log() {
@@ -136,9 +140,15 @@ long long Statistics::currentTimeMillis() {
     return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 }
 
+
+#include <windows.h>
+#include <psapi.h>
+#pragma comment(lib, "psapi.lib") 
+
 long long Statistics::currentMemoryUsage() {
-    MEMORYSTATUSEX memInfo;
-    memInfo.dwLength = sizeof(memInfo);
-    GlobalMemoryStatusEx(&memInfo);
-    return memInfo.ullTotalPhys - memInfo.ullAvailPhys;
+    PROCESS_MEMORY_COUNTERS_EX pmc;
+    if (GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc))) {
+        return static_cast<long long>(pmc.WorkingSetSize);
+    }
+    return -1;
 }

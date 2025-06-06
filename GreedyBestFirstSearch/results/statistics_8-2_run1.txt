@@ -1,0 +1,32 @@
+(8,2) 2025-05-23 07:01
+Number of wires: 8
+Number of comparators: 2
+Total networks identified: 3
+Running time: 00:00:00:020
+Final checks time: 00:00:00:010
+Total time: 00:00:00:030
+Used memory: 7 MB
+Total subsumptions checks: 37
+	- detected: 33 (89.1892%)
+	- due to direct output inclusion: 0
+	- failed by cluster sizes: 4
+	- failed by different zero/one sizes: 0
+	- no permutation: 0
+	- zero/one permutation fails: 0
+	- values permutation fails: 0
+Redundancies
+	- due to comparator positions: 1
+	- due to sorted output: 0
+
+Network with 2 comparators, fitness: 0.728105
+[(0,1);(2,3)]
+NOT a sorting network.
+
+Network with 2 comparators, fitness: 0.735076
+[(0,1);(0,2)]
+NOT a sorting network.
+
+Network with 2 comparators, fitness: 0.735076
+[(0,1);(1,2)]
+NOT a sorting network.
+

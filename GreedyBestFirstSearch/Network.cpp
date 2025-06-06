@@ -7,8 +7,9 @@
 #include <sstream>
 #include <algorithm>
 #include <regex>
+#include <numeric>
 
-Network::Network(int nbWires) : nbWires_(nbWires), last_(nbWires, nullptr), adjacents_(nbWires - 1, false) {
+Network::Network(int nbWires) : nbWires_(nbWires), last_(nbWires, -1), adjacents_(nbWires - 1, false) {
     generator = new OutputGenerator(this);
     //std::cout << "[DEBUG] Network(" << nbWires << ") constructor called at " << this << std::endl;
 }
@@ -35,9 +36,28 @@ Network::Network(Network* net, int i, int j) : Network(*net) {
 }
 
 Network::Network(Network* net, const Comparator& c) : Network(*net) {
-    //std::cout << "[DEBUG] Network(net, comparator) constructor called at " << this << std::endl;
+    OutputSet* originalOut = net->outputSet();
+    auto values = originalOut->bitValues();
+
     addComparator(c);
+
+    outputSet_ = new OutputSet(this);
+    int wire0 = c.getWire0();
+    int wire1 = c.getWire1();
+
+    for (int value = values->nextSetBit(0); value >= 0; value = values->nextSetBit(value + 1)) {
+        Sequence* seq = Sequence::getInstance(nbWires_, value);
+        bool bit0 = seq->get(wire0);
+        bool bit1 = seq->get(wire1);
+        if (bit0 && !bit1) {
+            seq = Sequence::getSwappedInstance(seq, wire0, wire1);
+        }
+        outputSet_->add(*seq);
+    }
+
+    prefix = net->prefix;
 }
+
 
 int Network::nbWires() const {
     return nbWires_;
@@ -93,9 +113,9 @@ bool Network::contains(int wire0, int wire1) {
 }
 
 bool Network::isRedundant(int wire0, int wire1) {
-    Comparator* lastComp = last_[wire0];
-    if (lastComp && last_[wire1] == lastComp)
-        return true;
+    int idx0 = last_[wire0];
+    int idx1 = last_[wire1];
+    if (idx0 >= 0 && idx0 == idx1) return true;
 
     OutputSet* out = outputSet();
     ValuesBitSet* values = out->bitValues();
@@ -134,11 +154,15 @@ void Network::addComparator(const Comparator& c) {
         layers_.back().add(added);
     }
 
-    last_[i] = &added;
-    last_[j] = &added;
+    int index = comparators_.size() - 1;
+    last_[i] = index;
+    last_[j] = index;
 
-    if (abs(i - j) == 1) {
-        adjacents_[std::min(i, j)] = true;
+
+    if (std::abs(i - j) == 1) {
+        if (i < nbWires_ - 1) {
+            adjacents_[i] = true;
+        }
     }
 
     outputSet_ = nullptr;
@@ -174,10 +198,12 @@ Comparator* Network::createRandomComparator() {
 
 Comparator* Network::addRandomComparator() {
     Comparator* c = createRandomComparator();
-    if (!(*c == *(last_[c->getWire0()]))) {
+    Comparator* lastComp = lastComparator(c->getWire0(), c->getWire1());
+    if (!lastComp || !(*c == *lastComp)) {
         addComparator(*c);
         return c;
     }
+
     delete c;
     return nullptr;
 }
@@ -214,9 +240,69 @@ Layer& Network::lastLayer() {
     return layers_.back();
 }
 
+Network* Network::untangle() {
+    std::vector<Comparator> comps;
+    for (const Comparator& c : comparators_) {
+        comps.emplace_back(c.getWire0(), c.getWire1());
+    }
+
+    int nbComps = comps.size();
+
+    for (int q = 0; q < nbComps; ++q) {
+        Comparator& cq = comps[q];
+
+        if (cq.isAscending()) continue;
+
+        int iq = cq.getWire0();
+        int jq = cq.getWire1();
+        cq.set(jq, iq);
+
+        for (int s = q + 1; s < nbComps; ++s) {
+            Comparator& cs = comps[s];
+            int is = cs.getWire0();
+            int js = cs.getWire1();
+
+            if (is == iq) is = jq;
+            else if (is == jq) is = iq;
+
+            if (js == iq) js = jq;
+            else if (js == jq) js = iq;
+
+            cs.set(is, js);
+        }
+    }
+
+    Network* net = new Network(nbWires_);
+    for (const Comparator& c : comps) {
+        net->addComparator(c);
+    }
+    return net;
+}
+
 std::vector<int> Network::checkEquivalence(Network* other) {
+    int n = nbWires_;
+    std::vector<int> perm(n);
+    std::iota(perm.begin(), perm.end(), 0);
+
+    do {
+        Network* pnet = this->permuteWires(perm);
+
+        Network* untangled = pnet->untangle();
+
+        if (untangled->toParseableString() == other->toParseableString()) {
+            delete pnet;
+            delete untangled;
+            return perm;
+        }
+
+        delete pnet;
+        delete untangled;
+
+    } while (std::next_permutation(perm.begin(), perm.end()));
+
     return {};
 }
+
 
 std::vector<int> Network::checkSubsumption(Network* other) {
     Subsumption* verifier = SubsumptionVerifier::getInstance();
@@ -236,14 +322,27 @@ int Network::getPrefixSize() const {
 }
 
 int Network::computeDepth(int i, int j) {
-    int d0 = last_[i] ? last_[i]->getDepth() : -1;
-    int d1 = last_[j] ? last_[j]->getDepth() : -1;
+    int d0 = (last_[i] >= 0) ? comparators_[last_[i]].getDepth() : -1;
+    int d1 = (last_[j] >= 0) ? comparators_[last_[j]].getDepth() : -1;
     return std::max(d0, d1) + 1;
 }
 
 std::string Network::toString() const {
     return toParseableString();
 }
+
+int Network::commonPrefix(Network* other) {
+    int count = -1;
+    int minSize = std::min(this->comparators_.size(), other->comparators_.size());
+    for (int i = 0; i < minSize; ++i) {
+        if (!(this->comparators_[i] == other->comparators_[i])) {
+            break;
+        }
+        count++;
+    }
+    return count;
+}
+
 
 std::string Network::toParseableString() const {
     std::ostringstream oss;
@@ -258,8 +357,14 @@ std::string Network::toParseableString() const {
 }
 
 #include "FitnessBadPosCount.h"
+#include "FitnessArticleFormula.h"
+#include "FitnessBad0.h"
+#include "FitnessBad1.h"
 
-FitnessBadPosCount fitnessImpl;
+//FitnessBadPosCount fitnessImpl;
+//FitnessArticleFormula fitnessImpl;
+FitnessBad0 fitnessImpl;
+//FitnessBad1 fitnessImpl;
 FitnessEstimator* Network::fitnessEstimator = &fitnessImpl;
 
 
@@ -297,8 +402,10 @@ Network::~Network() {
 
 Comparator* Network::lastComparator(int wire0, int wire1) const {
     if (wire0 >= last_.size() || wire1 >= last_.size()) return nullptr;
-    if (last_[wire0] == nullptr || last_[wire1] == nullptr) return nullptr;
-    return (last_[wire0] == last_[wire1]) ? last_[wire0] : nullptr;
+    int idx0 = last_[wire0];
+    int idx1 = last_[wire1];
+    if (idx0 == -1 || idx1 == -1) return nullptr;
+    return (idx0 == idx1) ? const_cast<Comparator*>(&comparators_[idx0]) : nullptr;
 }
 
 
@@ -319,3 +426,39 @@ void Network::parseOutput(const std::string& str) {
     }
 }
 
+Network* Network::createRandom(int nbWires, int size) {
+    Network* net = new Network(nbWires);
+    while (net->size() < size) {
+        net->addRandomComparator();
+    }
+    return net;
+}
+
+Network* Network::permuteWires(const std::vector<int>& p) {
+    if (p.size() != nbWires_) {
+        throw std::invalid_argument("Permutation size must match number of wires: " + std::to_string(nbWires_));
+    }
+
+    Network* net = new Network(nbWires_);
+    for (const Comparator& c : comparators_) {
+        int i = c.getWire0();
+        int j = c.getWire1();
+        net->addComparator(p[i], p[j]);
+    }
+
+    return net;
+}
+
+
+Network* Network::split(int fromIndex) {
+    if (fromIndex < 0 || fromIndex >= comparators_.size()) {
+        throw std::invalid_argument("Split index must be between 0 and " + std::to_string(comparators_.size() - 1));
+    }
+
+    Network* net = new Network(nbWires_);
+    for (size_t i = fromIndex; i < comparators_.size(); ++i) {
+        const Comparator& c = comparators_[i];
+        net->addComparator(c.getWire0(), c.getWire1());
+    }
+    return net;
+}

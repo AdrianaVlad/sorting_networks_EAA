@@ -1,4 +1,4 @@
-#include "WorkingList.h"
+﻿#include "WorkingList.h"
 #include "NetworkGenerator.h"
 #include <iostream>
 #include <limits>

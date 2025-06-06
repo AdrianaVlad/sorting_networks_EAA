@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,19 +21,32 @@
   <ItemGroup>
     <ClCompile Include="Comparator.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="ExecutorService.cpp" />
+    <ClCompile Include="FastThreadPool.cpp" />
     <ClCompile Include="FitnessArticleFormula.cpp" />
+    <ClCompile Include="FitnessBad0.cpp" />
+    <ClCompile Include="FitnessBad1.cpp" />
     <ClCompile Include="FitnessBadPosCount.cpp" />
     <ClCompile Include="FitnessClusterSize.cpp" />
+    <ClCompile Include="FitnessComposite.cpp" />
     <ClCompile Include="FitnessOutputSize.cpp" />
     <ClCompile Include="GreedyBestFirstSearch.cpp" />
     <ClCompile Include="GreenFilter.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MonitorThread.cpp" />
     <ClCompile Include="Network.cpp" />
+    <ClCompile Include="NetworkExpander.cpp" />
+    <ClCompile Include="NetworkGenerator.cpp" />
+    <ClCompile Include="NetworkIO.cpp" />
+    <ClCompile Include="NetworkList.cpp" />
+    <ClCompile Include="NetworkRemover.cpp" />
     <ClCompile Include="OutputCluster.cpp" />
     <ClCompile Include="OutputGenerator.cpp" />
     <ClCompile Include="OutputSet.cpp" />
     <ClCompile Include="Permutations.cpp" />
+    <ClCompile Include="RunLogger.cpp" />
+    <ClCompile Include="RuntimeNetwork.cpp" />
     <ClCompile Include="Sequence.cpp" />
     <ClCompile Include="SortingNetworks.cpp" />
     <ClCompile Include="Statistics.cpp" />
@@ -41,24 +54,39 @@
     <ClCompile Include="SubsumptionMatchImpl.cpp" />
     <ClCompile Include="SubsumptionVerifier.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="ValuesBitSet.cpp" />
+    <ClCompile Include="WorkingList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Comparator.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="ExecutorService.h" />
+    <ClInclude Include="FastThreadPool.h" />
     <ClInclude Include="FitnessArticleFormula.h" />
+    <ClInclude Include="FitnessBad0.h" />
+    <ClInclude Include="FitnessBad1.h" />
     <ClInclude Include="FitnessBadPosCount.h" />
     <ClInclude Include="FitnessClusterSize.h" />
+    <ClInclude Include="FitnessComposite.h" />
     <ClInclude Include="FitnessEstimator.h" />
     <ClInclude Include="FitnessOutputSize.h" />
     <ClInclude Include="GreedyBestFirstSearch.h" />
     <ClInclude Include="GreenFilter.h" />
     <ClInclude Include="Layer.h" />
+    <ClInclude Include="MonitorThread.h" />
     <ClInclude Include="Network.h" />
+    <ClInclude Include="NetworkExpander.h" />
+    <ClInclude Include="NetworkGenerator.h" />
+    <ClInclude Include="NetworkIO.h" />
+    <ClInclude Include="NetworkList.h" />
+    <ClInclude Include="NetworkRemover.h" />
     <ClInclude Include="OutputCluster.h" />
     <ClInclude Include="OutputGenerator.h" />
     <ClInclude Include="OutputSet.h" />
     <ClInclude Include="Permutations.h" />
+    <ClInclude Include="RunLogger.h" />
+    <ClInclude Include="RuntimeNetwork.h" />
     <ClInclude Include="Sequence.h" />
     <ClInclude Include="SortingNetworks.h" />
     <ClInclude Include="Statistics.h" />
@@ -66,7 +94,12 @@
     <ClInclude Include="SubsumptionMatchImpl.h" />
     <ClInclude Include="SubsumptionVerifier.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="ValuesBitSet.h" />
+    <ClInclude Include="WorkingList.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -182,5 +215,12 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets" Condition="Exists('packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets'))" />
+  </Target>
 </Project>

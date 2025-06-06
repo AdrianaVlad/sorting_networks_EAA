@@ -16,6 +16,11 @@ OutputCluster::OutputCluster(OutputSet* outputSet, int level)
     pos1_.resize(nbWires_, false);
 }
 
+OutputCluster::~OutputCluster() {
+    delete bitValues_;
+}
+
+
 OutputSet* OutputCluster::getOutputSet() const {
     return outputSet_;
 }

@@ -63,8 +63,6 @@ public:
     static int compareByClusters(Network* net0, Network* net1);
 
     Network* permuteWires(const std::vector<int>& perm);
-    Network* permuteComparators(const std::vector<int>& perm);
-    Network* untangle();
 
     void setPrefix(Network* prefix);
     Network* getPrefix();
@@ -73,6 +71,7 @@ public:
     std::vector<Comparator>& getComparators();
     bool isSorting() const;
     Comparator* lastComparator(int wire0, int wire1) const;
+    Network* untangle();
 
 protected:
     int nbWires_;
@@ -81,7 +80,8 @@ protected:
 
     std::vector<Comparator> comparators_;
     std::vector<Layer> layers_;
-    std::vector<Comparator*> last_;
+    //std::vector<Comparator*> last_;
+    std::vector<int> last_;
     std::vector<bool> adjacents_;
 
     mutable OutputSet* outputSet_ = nullptr;

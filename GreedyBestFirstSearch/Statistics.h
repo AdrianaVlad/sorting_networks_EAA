@@ -39,6 +39,7 @@ public:
 
     static void reset();
     static void print();
+    static void print(std::ostream& out);
     static void log();
     static std::string getInfo();
     static std::string getExtendedInfo();

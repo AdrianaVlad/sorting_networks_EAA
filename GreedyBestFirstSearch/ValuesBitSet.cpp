@@ -76,5 +76,12 @@ void ValuesBitSet::andNot(const ValuesBitSet& other) {
 }
 
 bool ValuesBitSet::operator==(const ValuesBitSet& other) const {
-    return bits_ == other.bits_;
+    size_t maxSize = std::max(bits_.size(), other.bits_.size());
+    for (size_t i = 0; i < maxSize; ++i) {
+        bool b1 = i < bits_.size() ? bits_[i] : false;
+        bool b2 = i < other.bits_.size() ? other.bits_[i] : false;
+        if (b1 != b2) return false;
+    }
+    return true;
 }
+

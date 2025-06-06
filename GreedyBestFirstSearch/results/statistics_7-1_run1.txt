@@ -1,0 +1,24 @@
+(7,1) 2025-05-23 09:39
+Number of wires: 7
+Number of comparators: 1
+Total networks identified: 1
+Running time: 00:00:00:002
+Final checks time: 00:00:00:002
+Total time: 00:00:00:004
+Used memory: 4 MB
+Total subsumptions checks: 0
+	- detected: 0 (0%)
+	- due to direct output inclusion: 0
+	- failed by cluster sizes: 0
+	- failed by different zero/one sizes: 0
+	- no permutation: 0
+	- zero/one permutation fails: 0
+	- values permutation fails: 0
+Redundancies
+	- due to comparator positions: 0
+	- due to sorted output: 0
+
+Network with 1 comparators, fitness: 0.716535
+[(0,1)]
+NOT a sorting network.
+

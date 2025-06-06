@@ -12,13 +12,11 @@ double FitnessArticleFormula::compute(const Network* net) const {
     std::vector<int> pos0 = out->posCount0();
     std::vector<int> pos1 = out->posCount1();
 
-    int bad0 = 0, bad1 = 0;
-    for (int i : pos0)
-        if (i != 0) ++bad0;
-    for (int i : pos1)
-        if (i != 0) ++bad1;
+    int badTotal = 0;
+    for (int i = 0; i < n; ++i)
+        if (pos0[i] != 0 || pos1[i] != 0)
+            ++badTotal;
 
-    int badTotal = bad0 + bad1;
     int outputSize = out->size();
 
     double weightedScore = factor * badTotal + (outputSize - n - 1);

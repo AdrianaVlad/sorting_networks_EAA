@@ -1,0 +1,112 @@
+(8,4) 2025-05-23 07:01
+Number of wires: 8
+Number of comparators: 4
+Total networks identified: 23
+Running time: 00:00:00:031
+Final checks time: 00:00:00:008
+Total time: 00:00:00:039
+Used memory: 29 MB
+Total subsumptions checks: 1409
+	- detected: 170 (12.0653%)
+	- due to direct output inclusion: 9
+	- failed by cluster sizes: 1108
+	- failed by different zero/one sizes: 0
+	- no permutation: 0
+	- zero/one permutation fails: 0
+	- values permutation fails: 0
+Redundancies
+	- due to comparator positions: 11
+	- due to sorted output: 10
+
+Network with 4 comparators, fitness: 0.700654
+[(0,1);(2,3);(4,5);(6,7)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.704575
+[(0,1);(2,3);(4,5);(0,6)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.816122
+[(0,1);(2,3);(4,5);(1,6)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.70719
+[(0,1);(2,3);(4,5);(0,2)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.70719
+[(0,1);(2,3);(4,5);(0,3)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.70719
+[(0,1);(2,3);(1,4);(0,1)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.595643
+[(0,1);(2,3);(4,5);(1,3)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.595643
+[(0,1);(2,3);(1,3);(0,2)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.820479
+[(0,1);(2,3);(1,4);(2,5)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.820479
+[(0,1);(2,3);(1,4);(3,5)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.708932
+[(0,1);(2,3);(0,4);(2,5)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.822222
+[(0,1);(2,3);(1,4);(0,2)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.822222
+[(0,1);(2,3);(1,4);(0,3)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.599129
+[(0,1);(2,3);(1,3);(0,4)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.710675
+[(0,1);(2,3);(0,2);(2,4)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.710675
+[(0,1);(2,3);(0,4);(1,2)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.710675
+[(0,1);(2,3);(1,3);(1,4)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.602614
+[(0,1);(1,2);(0,1);(0,3)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.602614
+[(0,1);(2,3);(1,3);(0,1)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.714161
+[(0,1);(2,3);(1,4);(3,4)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.714161
+[(0,1);(2,3);(0,4);(0,2)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.714161
+[(0,1);(2,3);(0,3);(1,2)]
+NOT a sorting network.
+
+Network with 4 comparators, fitness: 0.717647
+[(0,1);(2,3);(0,2);(0,4)]
+NOT a sorting network.
+

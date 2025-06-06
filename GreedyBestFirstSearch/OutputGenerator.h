@@ -18,7 +18,6 @@ public:
     std::vector<int> apply(const std::vector<int>& input) const;
 
     OutputSet* createAll() const;
-    OutputSet* createSampled(int sampleSize) const;
 
 private:
     Network* network_;

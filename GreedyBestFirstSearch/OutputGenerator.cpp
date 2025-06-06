@@ -62,22 +62,3 @@ OutputSet* OutputGenerator::createAll() const {
     }
     return outputSet;
 }
-
-OutputSet* OutputGenerator::createSampled(int sampleSize) const {
-    auto* sampledOutput = new OutputSet(network_);
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dist(0.0, 1.0);
-
-    double p = static_cast<double>(sampleSize) / maxInputSize_;
-    for (int value = 0; value < maxInputSize_; ++value) {
-        if (dist(gen) > p) {
-            continue;
-        }
-        Sequence input = *Sequence::getInstance(nbWires_, value);
-        Sequence output = apply(input);
-        sampledOutput->add(output);
-    }
-
-    return sampledOutput;
-}

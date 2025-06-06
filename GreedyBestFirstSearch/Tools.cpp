@@ -8,22 +8,34 @@
 
 namespace Tools {
 
-    std::bitset<32> toBitSet(int value) {
-        return std::bitset<32>(value);
+    std::vector<bool> Tools::toBitSet(int value, int bitsCount) {
+        std::vector<bool> bitSet(bitsCount, false);
+        for (int i = 0; i < bitsCount; ++i) {
+            bitSet[i] = (value >> (bitsCount - i - 1)) & 1;
+        }
+        return bitSet;
     }
 
-    int toInt(const std::bitset<32>& bits) {
-        return static_cast<int>(bits.to_ulong());
+    int Tools::toInt(const std::vector<bool>& bitSet) {
+        int value = 0;
+        int n = static_cast<int>(bitSet.size());
+        for (int i = 0; i < n; ++i) {
+            if (bitSet[i]) {
+                value |= (1 << (n - i - 1));
+            }
+        }
+        return value;
     }
 
-    std::string toBinaryString(int value, int nbits) {
-        std::bitset<32> bits(value);
+
+    std::string Tools::toBinaryString(const std::bitset<32>& bits, int nbits) {
         std::ostringstream oss;
         for (int i = nbits - 1; i >= 0; --i) {
             oss << bits[i];
         }
         return oss.str();
     }
+
 
     void printNetwork(const Network& net) {
         std::cout << "-------------------------------------------------\n";

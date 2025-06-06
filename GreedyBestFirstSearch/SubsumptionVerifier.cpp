@@ -1,7 +1,6 @@
 ﻿#include "SubsumptionVerifier.h"
 #include "Config.h"
 #include "SubsumptionMatchImpl.h"
-#include "SubsumptionBipartiteMatching.h"
 #include <iostream>
 #include <map>
 #include <functional>
@@ -14,7 +13,6 @@ Subsumption* SubsumptionVerifier::getInstance() {
 
         static const std::map<std::string, std::function<Subsumption* ()>> factory = {
             {"SubsumptionMatchImpl", []() { return new SubsumptionMatchImpl(); }},
-            {"SubsumptionBipartiteMatching", []() { return new SubsumptionBipartiteMatching(); }}
         };
 
         auto it = factory.find(implName);

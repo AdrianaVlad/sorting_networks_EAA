@@ -1,0 +1,76 @@
+(7,13) 2025-05-23 11:26
+Number of wires: 7
+Number of comparators: 13
+Total networks identified: 14
+Running time: 00:00:00:023
+Final checks time: 00:00:00:013
+Total time: 00:00:00:036
+Used memory: 17 MB
+Total subsumptions checks: 359
+	- detected: 14 (3.89972%)
+	- due to direct output inclusion: 37
+	- failed by cluster sizes: 299
+	- failed by different zero/one sizes: 0
+	- no permutation: 0
+	- zero/one permutation fails: 0
+	- values permutation fails: 0
+Redundancies
+	- due to comparator positions: 30
+	- due to sorted output: 223
+
+Network with 14 comparators, fitness: 0.253937
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(2,4);(1,4);(3,6);(1,2)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.253937
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(2,4);(1,4);(3,6);(5,6)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.253937
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(2,4);(1,4);(3,6);(3,4)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.254921
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(3,6);(1,2);(1,4);(2,3)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.254921
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(5,6);(2,4);(1,2);(2,4)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.128937
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(2,4);(1,4);(1,2);(3,4)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.254921
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(5,6);(2,4);(1,5);(1,2)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.380906
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(5,6);(2,4);(1,5);(1,4)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.254921
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(5,6);(2,4);(1,5);(3,5)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.254921
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(1,6);(2,4);(3,5);(1,2);(3,4)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.128937
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(3,6);(1,2);(5,6);(2,3)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.380906
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(5,6);(2,4);(1,5);(3,4)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.254921
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(2,4);(3,4);(1,6);(1,3)]
+NOT a sorting network.
+
+Network with 14 comparators, fitness: 0.128937
+[(0,1);(2,3);(4,5);(0,2);(4,6);(1,3);(0,4);(1,5);(2,6);(3,5);(5,6);(2,4);(1,2);(3,5)]
+NOT a sorting network.
+

@@ -11,6 +11,7 @@ class Network;
 class OutputCluster {
 public:
     OutputCluster(OutputSet* outputSet, int level);
+    ~OutputCluster();
 
     OutputSet* getOutputSet() const;
     Network* getNetwork() const;

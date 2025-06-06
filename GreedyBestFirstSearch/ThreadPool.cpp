@@ -13,7 +13,6 @@ ThreadPool::ThreadPool(size_t numThreads) : workers_(numThreads), taskCounters_(
 ThreadPool::~ThreadPool() {
     stop_ = true;
 
-    // Notifică toți workerii cu un dummy task
     for (auto& worker : workers_) {
         std::lock_guard<std::mutex> lock(worker.mutex);
         worker.queue.emplace_back([] {});
@@ -23,7 +22,6 @@ ThreadPool::~ThreadPool() {
         if (t.joinable()) t.join();
     }
 
-    // Afișează câte taskuri a executat fiecare thread
     for (size_t i = 0; i < taskCounters_.size(); ++i) {
         std::cout << "[Thread #" << i << "] tasks executed: " << taskCounters_[i] << "\n";
     }

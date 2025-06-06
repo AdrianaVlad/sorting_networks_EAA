@@ -14,6 +14,7 @@ void NetworkList::addNetwork(std::unique_ptr<RuntimeNetwork> net) {
     networks_.push_back(std::move(net));
 }
 
+/*
 void NetworkList::remove(RuntimeNetwork* net) {
     std::lock_guard<std::mutex> lock(mtx_);
     networks_.erase(
@@ -22,6 +23,20 @@ void NetworkList::remove(RuntimeNetwork* net) {
         networks_.end()
     );
 }
+
+*/
+
+void NetworkList::remove(RuntimeNetwork* net) {
+    std::lock_guard<std::mutex> lock(mtx_);
+    for (size_t i = 0; i < networks_.size(); ++i) {
+        if (networks_[i].get() == net) {
+            std::swap(networks_[i], networks_.back());
+            networks_.pop_back();
+            break;
+        }
+    }
+}
+
 
 RuntimeNetwork* NetworkList::getNetwork(int i) const {
     std::lock_guard<std::mutex> lock(mtx_);

@@ -3,6 +3,8 @@
 #include "NetworkRemover.h"
 #include <iostream>
 #include <cmath>
+#include <fstream>
+
 
 NetworkGenerator::NetworkGenerator(int nbWires, int toSize)
     : nbWires_(nbWires), fromSize_(toSize), toSize_(toSize),
@@ -140,8 +142,45 @@ void NetworkGenerator::createAll(int size) {
     Statistics::runningTime = t1 - t0;
     Statistics::usedMemory = Statistics::currentMemoryUsage();
     Statistics::nbNetworks = static_cast<int>(list_.size());
-    Statistics::print();
 
+    bool foundSorting = false;
+    double bestFitness = 1.0;
+    for (const auto& net : list_) {
+        double fitness = net->computeFitness();
+        bestFitness = std::min(bestFitness, fitness);
+        if (net->isSorting()) foundSorting = true;
+    }
+
+    std::string baseName = "statistics_" + std::to_string(nbWires_) + "-" + std::to_string(size);
+    std::string statsFile = "results/" + baseName + "_run" + std::to_string(runIndex_) + ".txt";
+
+    std::ofstream out(statsFile);
+    Statistics::print();
+    if (out.is_open()) {
+        Statistics::print(out);
+
+        for (const auto& net : list_) {
+            out << "Network with " << net->size()
+                << " comparators, fitness: "
+                << net->computeFitness() << "\n"
+                << net->toString() << "\n";
+
+            if (net->isSorting()) {
+                out << "Sorting network.\n";
+            }
+            else {
+                out << "NOT a sorting network.\n";
+            }
+
+            out << "\n";
+        }
+
+        out.close();
+    }
+    else {
+        std::cerr << "Could not open file " << statsFile << " for writing statistics.\n";
+    }
+    /*
     if (Statistics::ENABLED) {
         NetworkIO::writeSubsumptions(nbWires_, size);
         NetworkIO::writeFails(nbWires_, size);
@@ -155,6 +194,8 @@ void NetworkGenerator::createAll(int size) {
             std::cout << "\tFound!" << std::endl;
         }
     }
+
+    */
 
     auto totalEnd = clock::now();
     /*

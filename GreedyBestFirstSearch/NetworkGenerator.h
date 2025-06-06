@@ -15,6 +15,7 @@
 
 class NetworkGenerator {
 private:
+    int runIndex_ = 1;
     const int nbWires_;
     const int fromSize_;
     const int toSize_;
@@ -33,7 +34,7 @@ private:
 
     static inline bool SUBSUMPTION_ENABLED_ = false;
     static inline std::string OUT_DIR_ = "results2";
-    static inline int WORKING_LIST_LIMIT_ = 8000;
+    static inline int WORKING_LIST_LIMIT_ = 500;
 
     void createAll(int size);
     void finalCheck();
@@ -63,4 +64,6 @@ public:
     long getTotalNetworks() const { return totalNetworks_; }
     long getCheckedNetworks() const { return checkedNetworks_; }
     void setRunningMonitor(bool running);
+    void setRunIndex(int index) { runIndex_ = index; }
+
 };

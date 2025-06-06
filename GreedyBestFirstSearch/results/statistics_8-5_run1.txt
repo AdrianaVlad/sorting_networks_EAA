@@ -1,0 +1,272 @@
+(8,5) 2025-05-23 07:01
+Number of wires: 8
+Number of comparators: 5
+Total networks identified: 63
+Running time: 00:00:00:050
+Final checks time: 00:00:00:008
+Total time: 00:00:00:058
+Used memory: 74 MB
+Total subsumptions checks: 14574
+	- detected: 424 (2.90929%)
+	- due to direct output inclusion: 37
+	- failed by cluster sizes: 13692
+	- failed by different zero/one sizes: 0
+	- no permutation: 0
+	- zero/one permutation fails: 0
+	- values permutation fails: 0
+Redundancies
+	- due to comparator positions: 43
+	- due to sorted output: 50
+
+Network with 5 comparators, fitness: 0.696732
+[(0,1);(2,3);(4,5);(6,7);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.696732
+[(0,1);(2,3);(4,5);(1,6);(0,1)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.585185
+[(0,1);(2,3);(4,5);(1,3);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.696732
+[(0,1);(2,3);(4,5);(6,7);(0,3)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.585185
+[(0,1);(2,3);(4,5);(6,7);(1,3)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.809586
+[(0,1);(2,3);(4,5);(1,6);(2,7)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.698039
+[(0,1);(2,3);(4,5);(0,6);(2,7)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.809586
+[(0,1);(2,3);(4,5);(1,6);(3,7)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.810893
+[(0,1);(2,3);(4,5);(1,6);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.810893
+[(0,1);(2,3);(4,5);(1,6);(0,3)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.699346
+[(0,1);(2,3);(4,5);(1,3);(1,6)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.5878
+[(0,1);(2,3);(4,5);(1,3);(0,6)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.699346
+[(0,1);(2,3);(4,5);(0,2);(2,6)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.699346
+[(0,1);(2,3);(4,5);(0,6);(1,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.477124
+[(0,1);(2,3);(1,3);(0,2);(1,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.700218
+[(0,1);(2,3);(1,3);(0,2);(1,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.700218
+[(0,1);(2,3);(1,4);(0,1);(3,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.700218
+[(0,1);(2,3);(1,4);(0,1);(2,6)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.700218
+[(0,1);(2,3);(4,5);(0,6);(2,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.700218
+[(0,1);(2,3);(4,5);(0,6);(3,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.700218
+[(0,1);(2,3);(4,5);(0,2);(5,6)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.700218
+[(0,1);(2,3);(4,5);(0,6);(2,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.811765
+[(0,1);(2,3);(4,5);(1,6);(3,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.811765
+[(0,1);(2,3);(4,5);(1,6);(2,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.590414
+[(0,1);(2,3);(4,5);(1,3);(0,1)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.701961
+[(0,1);(2,3);(4,5);(0,6);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.701961
+[(0,1);(2,3);(4,5);(0,3);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.590414
+[(0,1);(2,3);(4,5);(1,3);(1,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.701961
+[(0,1);(2,3);(4,5);(0,2);(2,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.813508
+[(0,1);(2,3);(4,5);(1,6);(3,6)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.590414
+[(0,1);(2,3);(4,5);(1,3);(0,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.813508
+[(0,1);(2,3);(4,5);(0,2);(1,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.813508
+[(0,1);(2,3);(0,2);(2,4);(1,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.590414
+[(0,1);(2,3);(4,5);(1,3);(0,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.701961
+[(0,1);(2,3);(1,3);(0,4);(1,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.813508
+[(0,1);(2,3);(4,5);(0,3);(1,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.701961
+[(0,1);(2,3);(4,5);(0,2);(2,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.813508
+[(0,1);(2,3);(1,4);(3,5);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.701961
+[(0,1);(2,3);(4,5);(0,3);(1,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.701961
+[(0,1);(2,3);(4,5);(1,3);(1,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.590414
+[(0,1);(2,3);(0,4);(2,5);(1,3)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.592157
+[(0,1);(2,3);(1,4);(0,1);(1,3)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.703704
+[(0,1);(2,3);(1,4);(0,2);(1,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.592157
+[(0,1);(2,3);(1,4);(3,4);(0,1)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.592157
+[(0,1);(2,3);(1,3);(0,4);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.592157
+[(0,1);(2,3);(1,3);(0,2);(3,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.703704
+[(0,1);(2,3);(0,4);(0,2);(1,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.703704
+[(0,1);(2,3);(1,4);(3,4);(0,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.815251
+[(0,1);(2,3);(0,4);(0,2);(1,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.705447
+[(0,1);(2,3);(4,5);(0,2);(0,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.705447
+[(0,1);(2,3);(4,5);(0,2);(0,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.5939
+[(0,1);(2,3);(4,5);(1,3);(3,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.5939
+[(0,1);(2,3);(4,5);(1,3);(3,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.705447
+[(0,1);(2,3);(1,4);(2,5);(3,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.816993
+[(0,1);(2,3);(1,4);(2,5);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.705447
+[(0,1);(2,3);(1,4);(3,4);(3,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.705447
+[(0,1);(2,3);(0,4);(0,2);(2,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.70719
+[(0,1);(2,3);(0,4);(2,5);(0,2)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.70719
+[(0,1);(2,3);(1,4);(0,3);(3,4)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.595643
+[(0,1);(2,3);(0,4);(1,2);(0,1)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.70719
+[(0,1);(2,3);(1,4);(3,5);(4,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.818736
+[(0,1);(2,3);(1,4);(0,2);(0,5)]
+NOT a sorting network.
+
+Network with 5 comparators, fitness: 0.70719
+[(0,1);(2,3);(0,2);(0,4);(2,5)]
+NOT a sorting network.
+

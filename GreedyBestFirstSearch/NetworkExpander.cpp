@@ -100,7 +100,8 @@ void NetworkExpander::removeSubsumed(RuntimeNetwork* net) {
 
     for (int i = net->outSize + 1; i <= workList_->last(); ++i) {
         NetworkList* list = workList_->networkList(i);
-        for (int j = 0; j < list->size(); ++j) {
+        int n = list->size();
+        for (int j = 0; j < n; ++j) {
             RuntimeNetwork* other = list->getNetwork(j);
             if (other->isDead()) continue;
 
